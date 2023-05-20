@@ -31,7 +31,9 @@ int Developpeur::compterJeuxParticipes(ListeJeux& listeJeux) {
 
 
 void Developpeur::mettreAJourListeJeux(ListeJeux& listeJeux) {
-	int nouvelleCapacite = compterJeuxParticipes(listeJeux);
+	int nouvelleCapacite = compterJeuxParticipes(listeJeux); 
+
+			// Si 0??
 	
 	// Reallocation d’une liste avec la bonne capacite
 	Jeu** nouveauxElements = new Jeu * [nouvelleCapacite];
@@ -39,7 +41,7 @@ void Developpeur::mettreAJourListeJeux(ListeJeux& listeJeux) {
 	
 	// Copie des jeux a mettre a jour
 	while (nElements < nouvelleCapacite) { /// ?? pour enlever buffer overrun warning
-		for (int i = 0; i < listeJeux.capacite; i++) {
+		for (int i = 0; i < listeJeux.nElements; i++) {
 			if (listeJeux.elements[i]->developpeur == paireNomJeux_.first) {
 				nouveauxElements[nElements] = listeJeux.elements[i];
 				nElements++;
@@ -50,14 +52,16 @@ void Developpeur::mettreAJourListeJeux(ListeJeux& listeJeux) {
 	// Desallocation de l'ancien tableau de jeux participes
 	delete[] paireNomJeux_.second.elements;
 
-	// Enregistrement du nouveau tableau dans la structure listeJeu
+	// En/registrement du nouveau tableau dans la structure listeJeu
 	paireNomJeux_.second.elements = nouveauxElements;
 	paireNomJeux_.second.capacite = nouvelleCapacite;
 	paireNomJeux_.second.nElements = nElements;
 }
 
 void Developpeur::afficherJeuxParticipes() {
+	cout << "Liste des jeux du developpeur " << paireNomJeux_.first << " : " << endl;
 	for (int i = 0; i < paireNomJeux_.second.capacite; i++) {
-		cout << paireNomJeux_.second.elements[i]->titre;
+		cout << paireNomJeux_.second.elements[i]->titre << endl;
 	}
 }
+

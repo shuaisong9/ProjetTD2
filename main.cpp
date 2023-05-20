@@ -7,6 +7,9 @@
 #include "verification_allocation.hpp"
 #include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 
+#include "Developpeur.hpp"
+#include "ListeDeveloppeurs.hpp"
+
 using namespace std;
 using namespace iter;
 using namespace gsl;
@@ -382,7 +385,14 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	afficherListeJeux(listeJeux.elements[0]->designers.elements[0]->listeJeuxParticipes);
 
 	//TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
-	
+	string nom = "Square";
+	ListeJeux listeJeuxDev = {};
+	Developpeur dev(nom, listeJeuxDev);
+	dev.mettreAJourListeJeux(listeJeux);
+	dev.afficherJeuxParticipes();
+
+
+
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.;
 	detruireListeJeux(&listeJeux);
 
