@@ -1,8 +1,8 @@
 #include "Developpeur.hpp"
 
-Developpeur::Developpeur(string& nom, ListeJeux& listeJeux) {
+Developpeur::Developpeur(string& nom) {
 	paireNomJeux_.first = nom;
-	paireNomJeux_.second = listeJeux; // ListeJeux vide ??
+	paireNomJeux_.second = {}; // ListeJeux vide ??
 	// Allocation de elements ??
 	//paireNomJeux_.second = new Jeu * []; ?? 
 

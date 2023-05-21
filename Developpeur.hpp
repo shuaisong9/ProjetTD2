@@ -13,7 +13,7 @@ class Developpeur
 	//TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
 	//TODO: Les méthodes à faire...
 public:
-	Developpeur(string& nom, ListeJeux& listeJeux);
+	Developpeur(string& nom);
 
 	~Developpeur();
 

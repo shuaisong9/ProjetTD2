@@ -18,6 +18,7 @@ public:
 	ListeDeveloppeurs();
 	~ListeDeveloppeurs();
 
+	void afficher();
 	void ajouterDeveloppeur(Developpeur* ptrDeveloppeur);
 	void changerTailleListeDeveloppeurs(const unsigned nouvelleCapacite);
 	void retirerDeveloppeur(Developpeur* ptrDeveloppeur);

@@ -11,10 +11,21 @@ ListeDeveloppeurs::~ListeDeveloppeurs() {
 	// Iter sur elements (tableau de developpeurs)
 		// Appel retirerDeveloppeur() a chaque elem
 
-	delete[] elements;
+	for (unsigned int i = 0; i < nElements; i++) {
+		retirerDeveloppeur(elements[i]);
+	}
 
+	delete[] elements;
+	nElements = 0;
+	capacite = 0;
 }
 
+void ListeDeveloppeurs::afficher() {
+	cout << "Voici la liste des developpeurs ainsi que leurs jeux: " << endl << endl;
+	for (unsigned int i = 0; i < nElements; i++) {
+		elements[i]->afficherJeuxParticipes();
+	}
+}
 
 
 void ListeDeveloppeurs::changerTailleListeDeveloppeurs(const unsigned nouvelleCapacite)
@@ -24,7 +35,7 @@ void ListeDeveloppeurs::changerTailleListeDeveloppeurs(const unsigned nouvelleCa
 		return;
 	}
 
-	// Allouer un nouveau tableau de jeux avec la nouvelle capacité
+	// Allouer un nouveau tableau de developpeurs avec la nouvelle capacité
 	Developpeur** nouveauTableauJeux = new Developpeur * [nouvelleCapacite];
 
 	// Copier les pointeurs de jeux de l'ancien tableau vers le nouveau tableau
@@ -32,30 +43,53 @@ void ListeDeveloppeurs::changerTailleListeDeveloppeurs(const unsigned nouvelleCa
 		nouveauTableauJeux[i] = elements[i];
 	}
 
-	// Libérer l'ancien tableau de jeux
+	// Libérer l'ancien tableau de developpeurs
 	delete[] elements;
 
-	// Mettre à jour les informations de la liste de jeux avec le nouveau tableau et la nouvelle capacité
+	// Mettre à jour les informations de la liste de developpeurs avec le nouveau tableau et la nouvelle capacité
 	elements = nouveauTableauJeux;
 	capacite = nouvelleCapacite;
 }
 
 
 void ListeDeveloppeurs::ajouterDeveloppeur(Developpeur* ptrDeveloppeur) {
-	nElements++;
-	if (nElements > capacite) {
-		// Si saturation du tableau:
-		unsigned nouvelleCapacite = capacite * 2;
-		// max(1, b)
-		changerTailleListeDeveloppeurs(max(unsigned(1), nouvelleCapacite)); // Gestion du cas capacite == 0
-	}
+	
+	// Ajouter developpeur seulement si PAS dans le tableau ???
+		// Comparer nom? Comparer pointeur? 
 
-	elements[nElements - 1] = ptrDeveloppeur;
+	bool developpeurExiste = false;
+	for (unsigned int i = 0; i < nElements; i++) {
+		if (elements[i] == ptrDeveloppeur) {
+			developpeurExiste = true;
+		}
+	}
+	
+	if (!developpeurExiste) {
+		nElements++;
+		if (nElements > capacite) {
+			// Si saturation du tableau:
+			unsigned nouvelleCapacite = capacite * 2;
+			// max(1, b)
+			changerTailleListeDeveloppeurs(max(unsigned(1), nouvelleCapacite)); // Gestion du cas capacite == 0
+		}
+
+		elements[nElements - 1] = ptrDeveloppeur;	
+	}
 }
 
 void ListeDeveloppeurs::retirerDeveloppeur(Developpeur* ptrDeveloppeur) {
-		// Dans quel ordre?
-		 
+	
+	// Parcourir le tableau elements pour trouver le developpeur à enlever
+	for (unsigned int i = 0; i < nElements; i++) {
+		if (elements[i]->getNom() == ptrDeveloppeur->getNom()) {
+			// Remplacer le developpeur à enlever par le dernier developpeur de la liste
+			elements[i] = elements[nElements - 1];
+			nElements--;
+			//delete ptrDeveloppeur; // Appel du destructeur de Developpeur
+			return; // Sortir de la fonction après avoir effectué la suppression
+		}
+	}	
+		// Dans quel ordre?	 
 	// Desallouer listeJeux de chaque developpeur
 		// appel aux fonctions de detruire listeJeux ---> comment? Recopier code?
 	// Desallouer le ptrDeveloppeur

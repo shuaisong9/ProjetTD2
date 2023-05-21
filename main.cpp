@@ -385,15 +385,46 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	afficherListeJeux(listeJeux.elements[0]->designers.elements[0]->listeJeuxParticipes);
 
 	//TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
-	string nom = "Square";
-	ListeJeux listeJeuxDev = {};
-	Developpeur dev(nom, listeJeuxDev);
+	cout << ligneSeparation << endl;
+	string nom = "Nintendo";
+	Developpeur dev(nom);
 	dev.mettreAJourListeJeux(listeJeux);
 	dev.afficherJeuxParticipes();
+
+	string nom2 = "Square";
+	Developpeur dev2(nom2);
+	dev2.mettreAJourListeJeux(listeJeux);
+	dev2.afficherJeuxParticipes();
+
+	string nom3 = "Maxis";
+	Developpeur dev3(nom3);
+	dev3.mettreAJourListeJeux(listeJeux);
+	dev3.afficherJeuxParticipes();
+
+	string nom4 = "NotADevelopper";
+	Developpeur dev4(nom4);
+	dev4.mettreAJourListeJeux(listeJeux);
+	dev4.afficherJeuxParticipes();
+	
+	cout << ligneSeparation;
+	ListeDeveloppeurs listeDev;
+	listeDev.afficher();
+	cout << endl;
+
+	listeDev.ajouterDeveloppeur(&dev);
+	listeDev.ajouterDeveloppeur(&dev2);
+	listeDev.ajouterDeveloppeur(&dev3);
+	listeDev.ajouterDeveloppeur(&dev4);
+	listeDev.afficher();
+	cout << endl;
+
+	listeDev.retirerDeveloppeur(&dev2);
+	listeDev.afficher();
 
 
 
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.;
+	cout << ligneSeparation << endl;
 	detruireListeJeux(&listeJeux);
 
 }
