@@ -354,12 +354,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 
 	int* fuite = new int;  // Pour vérifier que la détection de fuites fonctionne; un message devrait dire qu'il y a une fuite à cette ligne.
 	delete fuite;
-	cout << "il y'a une fuite dans cette ligne";
-
-
-	for (int i = 0; i < 5; ++i) {
-		cout << i << endl;
-	}
+	//cout << "il y'a une fuite dans cette ligne";
 
 	
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
